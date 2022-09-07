@@ -1,8 +1,7 @@
 const express = require('express');
 const app = express();
-if (process.env.NODE_ENV !== 'production') {
-    require('dotenv').config()
-}
+require('dotenv').config();
+const port = process.env.PORT || 80;
 
 const expressLayouts = require('express-ejs-layouts');
 const indexRouter = require('./routes/index');
@@ -21,7 +20,7 @@ const db = mongoose.connection;
 db.on('error', err => console.error(err));
 db.once('open', () => console.log('Connected to mongoose'));
 
-app.listen(process.env.PORT || '0.0.0.0', () => {
-    console.log('Server is running on port');
+app.listen(port, () => {
+    console.log(`Server is running on port:${port}`);
     console.log("Connected to Database..");
 })
