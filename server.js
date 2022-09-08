@@ -1,3 +1,4 @@
+const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 require('dotenv').config();
@@ -11,6 +12,10 @@ app.set('views', __dirname + '/views');
 app.set('layout', 'layouts/layout');
 app.use(expressLayouts);
 app.use(express.static('public'));
+app.use(bodyParser.urlencoded({
+    limit: '10mb',
+    extended: true
+}))
 
 const mongoose = require('mongoose');
 mongoose.connect(process.env.DATABASE_URL)
